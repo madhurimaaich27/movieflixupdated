@@ -3,7 +3,6 @@ package com.movieapi.MovieflixAPI.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OmdbMovieDetails {
-
     @JsonProperty("imdbID")
     private String imdbID;
 
@@ -31,6 +30,10 @@ public class OmdbMovieDetails {
     @JsonProperty("Plot")
     private String plot;
 
+    @JsonProperty("Response")
+    private String response; // Added Response field
+
+    // Getters and setters
     public String getImdbID() { return imdbID; }
     public void setImdbID(String imdbID) { this.imdbID = imdbID; }
 
@@ -57,4 +60,7 @@ public class OmdbMovieDetails {
 
     public String getPlot() { return plot; }
     public void setPlot(String plot) { this.plot = plot; }
+
+    public String getResponse() { return response; }
+    public void setResponse(String response) { this.response = response; }
 }

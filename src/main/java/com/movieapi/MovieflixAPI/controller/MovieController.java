@@ -1,28 +1,31 @@
 package com.movieapi.MovieflixAPI.controller;
 
-
 import com.movieapi.MovieflixAPI.model.Movie;
 import com.movieapi.MovieflixAPI.service.MovieService;
 import com.movieapi.MovieflixAPI.repository.MovieRepository;
 import com.opencsv.CSVWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-//@CrossOrigin(origins = "*")
-//@CrossOrigin(origins = "http://localhost:8085")
+
 @CrossOrigin(origins = {"https://your-netlify-site.netlify.app", "http://localhost:8085"})
 @RestController
 @RequestMapping("/api/movies")
 public class MovieController {
+    private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
     private final MovieService movieService;
     private final MovieRepository movieRepository;
 
+    @Autowired
     public MovieController(MovieService movieService, MovieRepository movieRepository) {
         this.movieService = movieService;
         this.movieRepository = movieRepository;
@@ -52,10 +55,12 @@ public class MovieController {
         return movies;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable String id) {
-        Movie movie = movieService.getMovieById(id);
+    @GetMapping("/{imdbid}")
+    public ResponseEntity<Movie> getMovieByImdbId(@PathVariable("imdbid") String imdbId) {
+        logger.info("Requested IMDb ID: {}", imdbId);
+        Movie movie = movieService.getMovieByImdbId(imdbId);
         if (movie == null) {
+            logger.warn("Movie not found for IMDb ID: {}", imdbId);
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(movie);
