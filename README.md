@@ -64,17 +64,17 @@ movieflixupdated/
 Test the Live API
 
 IMDb Lookup:
-curl https://movieflix-api.onrender.com/api/movies/tt0133093
+curl https://movieflixupdated-1.onrender.com/api/movies/tt0133093
 
 Expected: JSON for The Matrix.
 
 Search:
-curl https://movieflix-api.onrender.com/api/movies?search=Matrix
+curl https://movieflixupdated-1.onrender.com/api/movies?search=Matrix
 
 Expected: Array of movie JSONs.
 
 All Movies:
-curl https://movieflix-api.onrender.com/api/movies
+curl https://movieflixupdated-1.onrender.com/api/movies
 
 Aggregates:
-curl https://movieflix-api.onrender.com/api/movies/aggregates
+curl https://movieflixupdated-1.onrender.com/api/movies/aggregates
